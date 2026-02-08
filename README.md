@@ -39,14 +39,14 @@
   ![专业文档图文生成](doc/images/专业文档图文生成.png)
 - 复杂 xlsx 生成  
   ![复杂 xlsx 生成](doc/images/复杂xlsx生成.png)
+- 支持 Skills  
+  ![支持 Skills](doc/images/4支持skills.png)
 - 复杂图形生成方便学习  
   ![复杂图形生成方便学习](doc/images/复杂图形生成方便学习.png)
 - 复杂论文 PDF 生成  
   ![复杂论文 PDF 生成](doc/images/复杂论文pdf生成.png)
 - 网站系统生成并部署  
   ![网站系统生成并部署](doc/images/网站系统生成既部署.png)
-- 支持 Skills  
-  ![支持 Skills](doc/images/4支持skills.png)
 
 ## 运行要求
 

@@ -39,14 +39,14 @@ Agent-Generated Demos (GIF, click to view):
   ![Professional document generation](doc/images/专业文档图文生成.png)
 - Complex xlsx generation  
   ![Complex xlsx generation](doc/images/复杂xlsx生成.png)
+- Skills support  
+  ![Skills support](doc/images/4支持skills.png)
 - Complex graphics for learning  
   ![Complex graphics for learning](doc/images/复杂图形生成方便学习.png)
 - Complex paper PDF generation  
   ![Complex paper PDF generation](doc/images/复杂论文pdf生成.png)
 - Website system generation and deployment  
   ![Website system generation and deployment](doc/images/网站系统生成既部署.png)
-- Skills support  
-  ![Skills support](doc/images/4支持skills.png)
 
 ## Requirements
 
