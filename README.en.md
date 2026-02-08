@@ -10,6 +10,21 @@
 
 Driven by AI programming, it provides professional-grade agent capabilities for non-IT users. It supports document and data creation, analysis, and automation, including xlsx analysis and calculation, professional docx writing, beautiful website and software generation, email sending, scheduled tasks, memory, and self-evolution. It also excels in everyday business scenarios: financial analysis, HR resume processing, browser automation, design and illustration, one-click generation and deployment of official websites, complex task handling, proactive task triggers, and a wide range of analyses. The platform supports high concurrency, allowing users to simultaneously run agents, Skills, MCP, and the user control panel. As a high-performance Web product, it requires no installation—just open and use—with extremely light resource consumption. It supports online preview and editing of Office documents, and with just a few words users can generate and analyze documents or even produce and deploy a complete website at high speed.
 
+Agent-Generated Demos (GIF):
+
+- Website generation  
+  ![Website generation](doc/images/官网生成.gif)
+- Document generation samples  
+  ![Document generation samples](doc/images/文档生成样例.gif)
+- Module showcase  
+  ![Module showcase](doc/images/模块展示.gif)
+- Design sketching  
+  ![Design sketching](doc/images/画设计图.gif)
+- Complex design  
+  ![Complex design](doc/images/复杂设计图.gif)
+- Misc generation cases  
+  ![Misc generation cases](doc/images/各种生成案例.gif)
+
 ## Requirements
 
 - CPU: 4 cores
