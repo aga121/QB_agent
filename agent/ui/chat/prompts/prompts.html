@@ -1,0 +1,30 @@
+<div class="prompt-panel" id="promptPanel" style="display: none;">
+    <div class="prompt-panel-header">
+        <span class="prompt-panel-title">提示词</span>
+        <div class="prompt-panel-actions">
+            <button class="prompt-manage-btn" id="promptManageBtn" type="button">管理</button>
+            <button class="prompt-add-inline" id="promptAddInlineBtn" type="button">新增</button>
+            <button class="prompt-close-btn" id="promptCloseBtn" type="button">×</button>
+        </div>
+    </div>
+    <div class="prompt-panel-search">
+        <input type="text" id="promptSearchInput" placeholder="搜索提示词">
+    </div>
+    <div class="prompt-panel-tabs" id="promptTabs">
+        <button class="prompt-tab active" data-scope="all" data-sort="recent" type="button">全部</button>
+        <button class="prompt-tab" data-scope="my" data-sort="recent" type="button">我的</button>
+        <button class="prompt-tab" data-scope="official" data-sort="recent" type="button">官方</button>
+        <button class="prompt-tab" data-scope="all" data-sort="usage" type="button">常用</button>
+        <button class="prompt-tab" data-scope="all" data-sort="recent" type="button">最近</button>
+    </div>
+    <div class="prompt-panel-list" id="promptList"></div>
+    <div class="prompt-editor hidden" id="promptEditor">
+        <div class="prompt-editor-title" id="promptEditorTitle">新建提示词</div>
+        <input type="text" id="promptNameInput" placeholder="提示词名称">
+        <textarea id="promptContentInput" rows="12" placeholder="提示词内容"></textarea>
+        <div class="prompt-editor-actions">
+            <button class="prompt-save-btn" id="promptSaveBtn" type="button">保存</button>
+            <button class="prompt-cancel-btn" id="promptCancelBtn" type="button">取消</button>
+        </div>
+    </div>
+</div>

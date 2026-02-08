@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源面板 - Queen Bee</title>
+    <link rel="stylesheet" href="/static/cdn_resourc/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/chat/chat.css">
+    <link rel="stylesheet" href="/static/resource_panel/resource_panel.css">
+</head>
+<body class="resource-page" data-require-auth>
+    <div id="navbar-container"></div>
+
+    <main class="resource-main">
+        <div class="resource-container">
+        <section class="resource-grid">
+            <div class="panel-card">
+                <div class="card-head">
+                    <h3>进程使用</h3>
+                    <span class="chip good">稳定</span>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value" id="threadsCurrent">--</div>
+                    <div class="metric-label">当前进程</div>
+                </div>
+                <div class="metric-row">
+                    <span>上限</span>
+                    <span id="threadsMax">--</span>
+                </div>
+                <div class="metric-bar">
+                    <span id="threadsBar" style="width: 0%;"></span>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="card-head">
+                    <h3>内存</h3>
+                    <span class="chip warn">警惕</span>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value" id="memoryCurrent">--</div>
+                    <div class="metric-label">当前占用</div>
+                </div>
+                <div class="metric-row">
+                    <span>上限</span>
+                    <span id="memoryMax">--</span>
+                </div>
+                <div class="metric-bar">
+                    <span id="memoryBar" style="width: 0%;"></span>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="card-head">
+                    <h3>磁盘</h3>
+                    <span class="chip good">平稳</span>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value" id="diskUsage">--</div>
+                    <div class="metric-label">工作区占用</div>
+                </div>
+                <div class="metric-row">
+                    <span>最近增长</span>
+                    <span id="diskGrowth">--</span>
+                </div>
+                <div class="metric-bar">
+                    <span id="diskBar" style="width: 0%;"></span>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="card-head">
+                    <h3>IO</h3>
+                    <span class="chip good">稳定</span>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value" id="ioThroughput">--</div>
+                    <div class="metric-label">读写吞吐</div>
+                </div>
+                <div class="metric-row">
+                    <span>IOPS</span>
+                    <span id="ioIops">--</span>
+                </div>
+                <div class="metric-bar">
+                    <span id="ioBar" style="width: 0%;"></span>
+                </div>
+            </div>
+
+            <div class="panel-card accent wide">
+                <div class="card-head">
+                    <h3>CPU 使用率</h3>
+                    <span class="chip live">Live</span>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value" id="cpuCurrent">--</div>
+                    <div class="metric-label">最近 5 分钟</div>
+                </div>
+                <div class="trend-chart" id="cpuTrend">
+                    <span style="height: 30%;"></span>
+                    <span style="height: 42%;"></span>
+                    <span style="height: 38%;"></span>
+                    <span style="height: 55%;"></span>
+                    <span style="height: 47%;"></span>
+                    <span style="height: 62%;"></span>
+                    <span style="height: 48%;"></span>
+                    <span style="height: 52%;"></span>
+                    <span style="height: 36%;"></span>
+                    <span style="height: 44%;"></span>
+                    <span style="height: 58%;"></span>
+                    <span style="height: 40%;"></span>
+                    <span style="height: 50%;"></span>
+                    <span style="height: 60%;"></span>
+                    <span style="height: 35%;"></span>
+                    <span style="height: 46%;"></span>
+                </div>
+            </div>
+
+            <div class="panel-card accent wide">
+                <div class="card-head">
+                    <h3>内存趋势</h3>
+                    <span class="chip live">Live</span>
+                </div>
+                <div class="card-metric">
+                    <div class="metric-value" id="memTrendCurrent">--</div>
+                    <div class="metric-label">最近 5 分钟</div>
+                </div>
+                <div class="trend-line">
+                    <div class="trend-axis">
+                        <span id="memAxisTop">90 MB</span>
+                        <span id="memAxisMid">70 MB</span>
+                        <span id="memAxisLow">50 MB</span>
+                    </div>
+                    <div class="trend-canvas">
+                        <div class="trend-grid">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <svg class="trend-path" id="memTrendPath" viewBox="0 0 320 120" preserveAspectRatio="none">
+                            <polyline
+                                points="0,90 30,88 60,78 90,80 120,65 150,70 180,55 210,60 240,48 270,52 300,40 320,45"
+                            ></polyline>
+                        </svg>
+                    </div>
+                    <div class="trend-x">
+                        <span>5 分钟前</span>
+                        <span>现在</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="resource-jobs">
+            <div class="section-title">
+                <div>
+                    <h2>Job 运行情况</h2>
+                    <p>你的隔离任务、端口与程序名，支持一键停止。</p>
+                </div>
+                <button class="ghost-btn">
+                    <i class="fas fa-sync"></i>
+                    刷新
+                </button>
+            </div>
+            <div class="job-table" id="jobTable">
+                <div class="job-row header">
+                    <span>进程</span>
+                    <span>端口</span>
+                    <span>内存占用</span>
+                    <span>CPU 占用</span>
+                    <span>状态</span>
+                    <span>操作</span>
+                </div>
+            </div>
+        </section>
+        </div>
+    </main>
+
+    <script src="/static/api.js"></script>
+    <script src="/static/auth-check.js"></script>
+    <script src="/static/common.js"></script>
+    <script>
+        function toggleUserMenu() {
+            const userMenu = document.querySelector('.user-menu');
+            if (userMenu) userMenu.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            const userMenu = document.querySelector('.user-menu');
+            if (userMenu && !userMenu.contains(e.target)) {
+                userMenu.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const resp = await fetch('/static/partials/navbar.html');
+                document.getElementById('navbar-container').innerHTML = await resp.text();
+                const activeLink = document.querySelector('.nav-item[data-nav="resource"]');
+                if (activeLink) activeLink.classList.add('active');
+                if (window.initUserInfo) window.initUserInfo();
+            } catch (err) {
+                console.error('加载导航失败', err);
+            }
+            let userId = localStorage.getItem('userId');
+            if (!userId) {
+                try {
+                    const userRaw = localStorage.getItem('user');
+                    const user = userRaw ? JSON.parse(userRaw) : null;
+                    userId = user ? (user.id || user.user_id) : null;
+                } catch (err) {
+                    userId = null;
+                }
+            }
+            if (!userId) return;
+
+            const cpuTrendKey = `resourceCpuTrend:${userId}`;
+            const memTrendKey = `resourceMemTrend:${userId}`;
+            const lastCpuKey = `resourceLastCpu:${userId}`;
+            const jobCpuKey = `resourceJobCpu:${userId}`;
+            const lastDiskKey = `resourceLastDisk:${userId}`;
+            const lastDiskStatsKey = `resourceLastDiskStats:${userId}`;
+
+            function formatBytes(bytes) {
+                if (!bytes || bytes <= 0) return '--';
+                const units = ['B', 'KB', 'MB', 'GB'];
+                let idx = 0;
+                let value = bytes;
+                while (value >= 1024 && idx < units.length - 1) {
+                    value /= 1024;
+                    idx += 1;
+                }
+                return `${value.toFixed(1)} ${units[idx]}`;
+            }
+
+            function formatPercent(value) {
+                if (value === null || value === undefined || isNaN(value)) return '--';
+                return `${Math.min(Math.max(value, 0), 100).toFixed(0)}%`;
+            }
+
+            function setText(id, value) {
+                const el = document.getElementById(id);
+                if (el) el.textContent = value;
+            }
+
+            function updateBar(id, current, max) {
+                const el = document.getElementById(id);
+                if (!el || !max) return;
+                const pct = Math.min((current / max) * 100, 100);
+                el.style.width = `${pct.toFixed(0)}%`;
+            }
+
+            function updateCpuChart(points) {
+                const container = document.getElementById('cpuTrend');
+                if (!container) return;
+                const bars = container.querySelectorAll('span');
+                bars.forEach((bar, idx) => {
+                    const val = points[idx] || 0;
+                    bar.style.height = `${Math.max(6, Math.min(100, val))}%`;
+                });
+            }
+
+            function updateMemChart(points, maxMb) {
+                const svg = document.getElementById('memTrendPath');
+                if (!svg) return;
+                const polyline = svg.querySelector('polyline');
+                if (!polyline || points.length === 0) return;
+                const max = maxMb && maxMb > 0 ? maxMb : Math.max(...points, 1);
+                if (points.length < 2) {
+                    const val = points[0] || 0;
+                    const y = 120 - (val / max) * 90;
+                    polyline.setAttribute('points', `0,${y.toFixed(0)} 320,${y.toFixed(0)}`);
+                } else {
+                    const coords = points.map((val, idx) => {
+                        const x = (320 / (points.length - 1)) * idx;
+                        const y = 120 - (val / max) * 90;
+                        return `${x.toFixed(0)},${y.toFixed(0)}`;
+                    });
+                    polyline.setAttribute('points', coords.join(' '));
+                }
+
+                const top = document.getElementById('memAxisTop');
+                const mid = document.getElementById('memAxisMid');
+                const low = document.getElementById('memAxisLow');
+                if (top && mid && low) {
+                    top.textContent = `${Math.round(max)} MB`;
+                    mid.textContent = `${Math.round(max * (2 / 3))} MB`;
+                    low.textContent = `${Math.round(max * (1 / 3))} MB`;
+                }
+            }
+
+            async function refreshStatus() {
+                try {
+                    const resp = await fetch(`/api/v1/resource_panel/status?user_id=${userId}`, {
+                        headers: { 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` }
+                    });
+                    if (!resp.ok) return;
+                    const data = await resp.json();
+
+                    const threadsCur = data.threads?.current ?? 0;
+                    const threadsMax = data.threads?.max ?? 0;
+                    setText('threadsCurrent', threadsCur.toString());
+                    setText('threadsMax', threadsMax ? threadsMax.toString() : '--');
+                    updateBar('threadsBar', threadsCur, threadsMax);
+
+                    const memCur = data.memory?.current_bytes ?? 0;
+                    const memMax = data.memory?.max_bytes ?? 0;
+                    setText('memoryCurrent', formatBytes(memCur));
+                    setText('memoryMax', memMax ? formatBytes(memMax) : '--');
+                    updateBar('memoryBar', memCur, memMax);
+
+                    const diskBytes = data.disk?.bytes ?? 0;
+                    setText('diskUsage', formatBytes(diskBytes));
+                    const lastDisk = parseInt(sessionStorage.getItem(lastDiskKey) || '0', 10);
+                    if (lastDisk && diskBytes) {
+                        const diff = diskBytes - lastDisk;
+                        const sign = diff >= 0 ? '+' : '-';
+                        setText('diskGrowth', `${sign}${formatBytes(Math.abs(diff))}`);
+                    } else {
+                        setText('diskGrowth', '--');
+                    }
+                    sessionStorage.setItem(lastDiskKey, diskBytes.toString());
+                    updateBar('diskBar', diskBytes, diskBytes * 2 || 1);
+
+                    const diskStats = data.disk_stats || {};
+                    const lastStats = JSON.parse(sessionStorage.getItem(lastDiskStatsKey) || 'null');
+                    const nowMs = Date.now();
+                    if (lastStats && diskStats.read_bytes !== undefined) {
+                        const deltaTime = (nowMs - lastStats.timestamp) / 1000;
+                        const deltaBytes = (diskStats.read_bytes + diskStats.write_bytes) - (lastStats.read_bytes + lastStats.write_bytes);
+                        const deltaOps = (diskStats.reads_completed + diskStats.writes_completed) - (lastStats.reads_completed + lastStats.writes_completed);
+                        const throughput = deltaTime > 0 ? deltaBytes / deltaTime : 0;
+                        const iops = deltaTime > 0 ? deltaOps / deltaTime : 0;
+                        setText('ioThroughput', `${(throughput / 1024 / 1024).toFixed(1)} MB/s`);
+                        setText('ioIops', `${iops.toFixed(0)}`);
+                        updateBar('ioBar', throughput, throughput * 4 || 1);
+                    } else {
+                        setText('ioThroughput', '--');
+                        setText('ioIops', '--');
+                        updateBar('ioBar', 0, 1);
+                    }
+                    sessionStorage.setItem(lastDiskStatsKey, JSON.stringify({
+                        ...diskStats,
+                        timestamp: nowMs
+                    }));
+
+                    const lastCpuRaw = JSON.parse(sessionStorage.getItem(lastCpuKey) || 'null');
+                    const now = Date.now();
+                    let cpuPercent = null;
+                    if (lastCpuRaw) {
+                        const deltaUsage = data.cpu.usage_usec - lastCpuRaw.usage_usec;
+                        const deltaTime = (now - lastCpuRaw.timestamp) * 1000;
+                        if (deltaTime > 0) {
+                            if (deltaUsage <= 0 || deltaUsage < 1000) {
+                                cpuPercent = 0;
+                            } else {
+                                cpuPercent = (deltaUsage / deltaTime) * 100;
+                            }
+                        }
+                    }
+                    sessionStorage.setItem(lastCpuKey, JSON.stringify({ usage_usec: data.cpu.usage_usec, timestamp: now }));
+
+                    const cpuTrend = JSON.parse(sessionStorage.getItem(cpuTrendKey) || '[]');
+                    const normalizedCpu = cpuPercent === null ? 0 : Math.min(100, Math.max(0, cpuPercent));
+                    cpuTrend.push(normalizedCpu);
+                    if (cpuTrend.length > 16) cpuTrend.shift();
+                    sessionStorage.setItem(cpuTrendKey, JSON.stringify(cpuTrend));
+                    setText('cpuCurrent', cpuPercent === null ? '--' : formatPercent(normalizedCpu));
+                    updateCpuChart(cpuTrend.map(val => val));
+
+                    const memTrend = JSON.parse(sessionStorage.getItem(memTrendKey) || '[]');
+                    memTrend.push(memCur / 1024 / 1024);
+                    if (memTrend.length > 16) memTrend.shift();
+                    sessionStorage.setItem(memTrendKey, JSON.stringify(memTrend));
+                    setText('memTrendCurrent', memCur ? formatBytes(memCur) : '--');
+                    const memMaxMb = memMax ? memMax / 1024 / 1024 : 0;
+                    updateMemChart(memTrend, memMaxMb);
+
+                const jobTable = document.getElementById('jobTable');
+                if (jobTable) {
+                    const header = jobTable.querySelector('.job-row.header');
+                    jobTable.innerHTML = '';
+                    if (header) jobTable.appendChild(header);
+                    const jobs = data.jobs || [];
+                    const jobCpuCache = JSON.parse(sessionStorage.getItem(jobCpuKey) || '{}');
+                    const nowTs = Date.now();
+                    if (jobs.length === 0) {
+                        const empty = document.createElement('div');
+                        empty.className = 'job-row';
+                        empty.innerHTML = '<span>暂无任务</span><span>-</span><span>-</span><span>-</span><span class="status idle">空闲</span><span>-</span>';
+                        jobTable.appendChild(empty);
+                    } else {
+                        jobs.slice(0, 10).forEach(job => {
+                            const row = document.createElement('div');
+                            row.className = 'job-row';
+                            const ports = job.ports?.length ? job.ports.join(',') : '-';
+                            const memory = job.memory_mb ? `${job.memory_mb} MB` : '--';
+                            let cpuText = '--';
+                            if (job.cpu_usage_usec !== undefined) {
+                                const prev = jobCpuCache[job.unit];
+                                if (prev && prev.usage_usec !== undefined && prev.timestamp) {
+                                    const deltaUsage = job.cpu_usage_usec - prev.usage_usec;
+                                    const deltaTime = (nowTs - prev.timestamp) * 1000;
+                                    if (deltaUsage > 0 && deltaTime > 0) {
+                                        cpuText = `${Math.min(100, Math.max(0, (deltaUsage / deltaTime) * 100)).toFixed(0)}%`;
+                                    }
+                                }
+                                jobCpuCache[job.unit] = { usage_usec: job.cpu_usage_usec, timestamp: nowTs };
+                            }
+                            const statusMap = {
+                                active: { text: '运行中', cls: 'running' },
+                                inactive: { text: '已结束', cls: 'idle' },
+                                failed: { text: '失败', cls: 'warning' },
+                                activating: { text: '启动中', cls: 'warning' },
+                            };
+                            const statusInfo = statusMap[job.status] || { text: job.status || '未知', cls: 'idle' };
+                            row.innerHTML = `
+                                <span>${job.command || job.unit}</span>
+                                <span>${ports}</span>
+                                <span>${memory}</span>
+                                <span>${cpuText}</span>
+                                <span class="status ${statusInfo.cls}">${statusInfo.text}</span>
+                                <span><button class="stop-btn" data-unit="${job.unit}">停止</button></span>
+                            `;
+                            jobTable.appendChild(row);
+                        });
+                    }
+                    const activeUnits = new Set(jobs.map(job => job.unit));
+                    Object.keys(jobCpuCache).forEach(unit => {
+                        if (!activeUnits.has(unit)) delete jobCpuCache[unit];
+                    });
+                    sessionStorage.setItem(jobCpuKey, JSON.stringify(jobCpuCache));
+                }
+            } catch (err) {
+                console.error('资源面板更新失败', err);
+            }
+            }
+
+            document.addEventListener('click', async (event) => {
+                const target = event.target;
+                if (!target.classList.contains('stop-btn')) return;
+                const unit = target.getAttribute('data-unit');
+                if (!unit) return;
+                if (!confirm('确定要停止该任务吗？')) return;
+                try {
+                    const resp = await fetch(`/api/v1/resource_panel/stop?user_id=${userId}&unit=${encodeURIComponent(unit)}`, {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` }
+                    });
+                    if (!resp.ok) {
+                        alert('停止任务失败');
+                        return;
+                    }
+                    target.disabled = true;
+                    target.textContent = '已停止';
+                    await refreshStatus();
+                } catch (err) {
+                    alert('停止任务失败');
+                }
+            });
+
+            await refreshStatus();
+            setInterval(refreshStatus, 5000);
+        });
+    </script>
+</body>
+</html>

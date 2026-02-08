@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP 市场 - Queen Bee</title>
+    <link rel="stylesheet" href="/static/cdn_resourc/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/chat/chat.css">
+    <link rel="stylesheet" href="/static/mcp/mcp.css">
+</head>
+<body class="mcp-page">
+    <div id="navbar-container"></div>
+
+    <main class="mcp-main">
+        <div class="mcp-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Model Context Protocol</span>
+                </div>
+                <h1 class="hero-title">
+                    为你的 AI 助手<br>
+                    <span class="gradient-text">扩展无限可能</span>
+                </h1>
+                <p class="hero-description">
+                    从 MCP 市场发现并安装强大的工具，让你的 AI 助手能力更上一层楼
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="installedCount">0</div>
+                        <div class="stat-label">已安装</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">1000+</div>
+                        <div class="stat-label">可用工具</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <div class="illustration-card">
+                    <div class="card-header">
+                        <div class="card-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-line"></div>
+                        <div class="code-line short"></div>
+                        <div class="code-line"></div>
+                        <div class="code-line medium"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Install Section -->
+        <section class="install-section">
+            <div class="section-header">
+                <h2>安装新的 MCP</h2>
+                <p>从 <a href="https://mcpmarket.cn/" target="_blank" class="link">MCP 市场</a> 发现并安装工具</p>
+            </div>
+
+            <div class="install-card">
+                <div class="install-guide">
+                    <div class="guide-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>访问 MCP 市场</h3>
+                            <p>前往 <a href="https://mcpmarket.cn/" target="_blank" class="link">https://mcpmarket.cn/</a> 浏览可用的 MCP 工具</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>选择并创建</h3>
+                            <p>找到你需要的工具，点击"创建"按钮</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>复制 MCP URL</h3>
+                            <p>点击"复制 MCP URL"获取类似这样的链接：<br>
+                            <code class="url-example">https://mcpmarket.cn/mcp/30875b108d7223704fc7e6ec</code></p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>粘贴并安装</h3>
+                            <p>将 URL 粘贴到下方输入框，并填写MCP名称，点击"安装到所有智能体"按钮</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="install-form">
+                    <div class="form-group">
+                        <label for="mcpNameInput">MCP 名称</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-cube input-icon"></i>
+                            <input
+                                type="text"
+                                id="mcpNameInput"
+                                placeholder="输入 MCP 名称，例如：Web Search"
+                                class="url-input"
+                            >
+                            <button class="clear-btn" id="clearNameBtn" style="display: none;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="input-hint">
+                            <i class="fas fa-info-circle"></i>
+                            为 MCP 工具起一个易于识别的名称
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mcpUrlInput">MCP URL</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-link input-icon"></i>
+                            <input
+                                type="text"
+                                id="mcpUrlInput"
+                                placeholder="粘贴 MCP URL，例如：https://mcpmarket.cn/mcp/xxx"
+                                class="url-input"
+                            >
+                            <button class="clear-btn" id="clearInputBtn" style="display: none;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="input-hint">
+                            <i class="fas fa-info-circle"></i>
+                            支持从 mcpmarket.cn 获取的 MCP URL
+                        </div>
+                    </div>
+
+                    <button class="install-button" id="installButton">
+                        <i class="fas fa-download"></i>
+                        <span>安装到所有智能体</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installed List Section -->
+        <section class="installed-section">
+            <div class="section-header">
+                <h2>已安装的 MCP</h2>
+                <p class="section-subtitle">管理你的 MCP 工具</p>
+            </div>
+
+            <div class="mcp-list" id="mcpList">
+                <div class="empty-state">
+                    <i class="fas fa-cube"></i>
+                    <p>还没有安装任何 MCP</p>
+                    <a href="https://mcpmarket.cn/" target="_blank" class="link">前往市场探索 →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+</main>
+
+<script src="/static/api.js"></script>
+    <script src="/static/auth-check.js"></script>
+    <script src="/static/common.js"></script>
+    <script>
+        // 用户菜单切换
+        function toggleUserMenu() {
+            const userMenu = document.querySelector('.user-menu');
+            if (userMenu) userMenu.classList.toggle('active');
+        }
+
+        // 全局点击事件，关闭用户菜单
+        document.addEventListener('click', function(e) {
+            const userMenu = document.querySelector('.user-menu');
+            if (userMenu && !userMenu.contains(e.target)) {
+                userMenu.classList.remove('active');
+            }
+        });
+
+        // MCP 状态管理
+        const mcpState = {
+            installed: []
+        };
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const resp = await fetch('/static/partials/navbar.html');
+                document.getElementById('navbar-container').innerHTML = await resp.text();
+                const activeLink = document.querySelector('.nav-item[data-nav="mcp"]');
+                if (activeLink) activeLink.classList.add('active');
+                if (window.initUserInfo) window.initUserInfo();
+            } catch (err) {
+                console.error('加载导航失败', err);
+            }
+
+            // 加载已安装的 MCP
+            await loadInstalledMCPs();
+
+            // 绑定事件
+            bindEvents();
+        });
+
+        function bindEvents() {
+            // 清除输入按钮
+            const clearBtn = document.getElementById('clearInputBtn');
+            const urlInput = document.getElementById('mcpUrlInput');
+            const clearNameBtn = document.getElementById('clearNameBtn');
+            const nameInput = document.getElementById('mcpNameInput');
+
+            urlInput.addEventListener('input', function() {
+                clearBtn.style.display = this.value ? 'flex' : 'none';
+            });
+
+            clearBtn.addEventListener('click', function() {
+                urlInput.value = '';
+                clearBtn.style.display = 'none';
+                urlInput.focus();
+            });
+
+            nameInput.addEventListener('input', function() {
+                clearNameBtn.style.display = this.value ? 'flex' : 'none';
+            });
+
+            clearNameBtn.addEventListener('click', function() {
+                nameInput.value = '';
+                clearNameBtn.style.display = 'none';
+                nameInput.focus();
+            });
+
+            // 安装按钮
+            document.getElementById('installButton').addEventListener('click', installMCP);
+
+            // Enter 键安装
+            urlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    installMCP();
+                }
+            });
+
+            nameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    urlInput.focus();
+                }
+            });
+        }
+
+        async function loadInstalledMCPs() {
+            try {
+                const result = await API.getInstalledMCPs();
+                mcpState.installed = result.mcps || [];
+                renderMCPList();
+                updateStats();
+            } catch (err) {
+                console.error('加载 MCP 列表失败:', err);
+            }
+        }
+
+        function renderMCPList() {
+            const list = document.getElementById('mcpList');
+
+            if (!mcpState.installed.length) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-cube"></i>
+                        <p>还没有安装任何 MCP</p>
+                        <a href="https://mcpmarket.cn/" target="_blank" class="link">前往市场探索 →</a>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = mcpState.installed.map((mcp, index) => `
+                <div class="mcp-card">
+                    <div class="mcp-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="mcp-info">
+                        <div class="mcp-name">${escapeHtml(mcp.name || '未命名 MCP')}</div>
+                        <div class="mcp-url">${escapeHtml(truncateUrl(mcp.url))}</div>
+                    </div>
+                    <button class="remove-btn" onclick="removeMCP(${index})" title="移除">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        async function installMCP() {
+            const nameInput = document.getElementById('mcpNameInput');
+            const urlInput = document.getElementById('mcpUrlInput');
+            const name = nameInput.value.trim();
+            const url = urlInput.value.trim();
+
+            if (!name) {
+                showToast('请输入 MCP 名称', 'error');
+                return;
+            }
+
+            if (!url) {
+                showToast('请输入 MCP URL', 'error');
+                return;
+            }
+
+            if (!url.includes('mcpmarket.cn/mcp/')) {
+                showToast('请输入有效的 MCP URL', 'error');
+                return;
+            }
+
+            const installBtn = document.getElementById('installButton');
+            const originalContent = installBtn.innerHTML;
+            installBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>安装中...</span>';
+            installBtn.disabled = true;
+
+            try {
+                await API.installMCP(url, name);
+                showToast('MCP 安装成功');
+                nameInput.value = '';
+                urlInput.value = '';
+                document.getElementById('clearNameBtn').style.display = 'none';
+                document.getElementById('clearInputBtn').style.display = 'none';
+                await loadInstalledMCPs();
+            } catch (err) {
+                showToast(err.message || '安装失败', 'error');
+            } finally {
+                installBtn.innerHTML = originalContent;
+                installBtn.disabled = false;
+            }
+        }
+
+        async function removeMCP(index) {
+            const mcp = mcpState.installed[index];
+            if (!confirm(`确定要移除 "${mcp.name}" 吗？`)) {
+                return;
+            }
+
+            try {
+                await API.removeMCP(mcp.id);
+                showToast('MCP 已移除');
+                await loadInstalledMCPs();
+            } catch (err) {
+                showToast(err.message || '移除失败', 'error');
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('installedCount').textContent = mcpState.installed.length;
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            toast.className = `toast ${type}`;
+            toastMessage.textContent = message;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+            }, 3000);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function truncateUrl(url) {
+            if (url.length > 50) {
+                return url.substring(0, 25) + '...' + url.substring(url.length - 20);
+            }
+            return url;
+        }
+    </script>
+</body>
+</html>

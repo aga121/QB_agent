@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会员管理后台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input[type="tel"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="tel"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .package-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .package-option {
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .package-option input[type="radio"] {
+            display: none;
+        }
+
+        .package-option label {
+            display: block;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 0;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .package-option input[type="radio"]:checked + label {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .package-option label:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* 会员列表区域 */
+        .member-list-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .member-list-section h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .member-table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .member-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .member-table thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .member-table th {
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid #dee2e6;
+            white-space: nowrap;
+        }
+
+        .member-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .member-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .member-table .active {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .member-table .inactive {
+            color: #dc3545;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .pagination button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-info {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 标签切换 */
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-button:hover {
+            color: #667eea;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .package-options {
+                flex-direction: column;
+            }
+
+            .package-option {
+                width: 100%;
+            }
+
+            .member-table-container {
+                max-height: 300px;
+            }
+
+            .member-table {
+                font-size: 11px;
+            }
+
+            .member-table th,
+            .member-table td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👑 会员管理后台</h1>
+
+        <!-- 标签按钮 -->
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="switchTab('activate')">开通会员</button>
+            <button class="tab-button" onclick="switchTab('list')">会员列表</button>
+        </div>
+
+        <!-- 开通会员内容 -->
+        <div class="tab-content active" id="activateTab">
+            <form id="membershipForm">
+            <div class="form-group">
+                <label for="phone">手机号码</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="请输入手机号码"
+                    pattern="[0-9]{11}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>选择套餐</label>
+                <div class="package-options">
+                    <div class="package-option">
+                        <input type="radio" id="pkg39" name="package" value="39" checked>
+                        <label for="pkg39">39元<br><small>月卡</small></label>
+                    </div>
+                    <div class="package-option">
+                        <input type="radio" id="pkg99" name="package" value="99">
+                        <label for="pkg99">99元<br><small>季卡</small></label>
+                    </div>
+                    <div class="package-option">
+                        <input type="radio" id="pkg299" name="package" value="299">
+                        <label for="pkg299">299元<br><small>年卡</small></label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">开通会员</button>
+        </form>
+
+        <div class="loading" id="loading"></div>
+        <div class="message" id="message"></div>
+        </div>
+
+        <!-- 会员列表内容 -->
+        <div class="tab-content" id="listTab">
+        <div class="member-list-section" style="margin-top: 0; padding-top: 20px; border-top: none;">
+            <h2>📋 会员记录列表</h2>
+            <div class="member-table-container">
+                <table class="member-table">
+                    <thead>
+                        <tr>
+                            <th>手机号</th>
+                            <th>套餐类型</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>状态</th>
+                            <th>更新时间</th>
+                        </tr>
+                    </thead>
+                    <tbody id="memberListBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #999;">加载中...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <button id="prevPage" onclick="changePage(-1)">上一页</button>
+                <span class="page-info" id="pageInfo">第 1 页</span>
+                <button id="nextPage" onclick="changePage(1)">下一页</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SECRET_KEY = 'usyttnm-uygbmm776sw65doj-suucnnu997sdscerefghhhheedddtgfdl';
+
+        // 检查 URL 参数
+        function checkAccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = urlParams.get('key');
+
+            if (key !== SECRET_KEY) {
+                document.body.innerHTML = `
+                    <div style="text-align: center; color: white;">
+                        <h1 style="font-size: 48px; margin-bottom: 20px;">🚫</h1>
+                        <p style="font-size: 18px;">访问被拒绝</p>
+                    </div>
+                `;
+                return false;
+            }
+            return true;
+        }
+
+        // 显示消息
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // 提交表单
+        document.getElementById('membershipForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const phone = document.getElementById('phone').value.trim();
+            const packageEl = document.querySelector('input[name="package"]:checked');
+            const packagePrice = packageEl ? packageEl.value : null;
+
+            if (!phone || !packagePrice) {
+                showMessage('请填写完整信息', 'error');
+                return;
+            }
+
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                showMessage('请输入正确的手机号码', 'error');
+                return;
+            }
+
+            const loadingEl = document.getElementById('loading');
+            const submitBtn = document.querySelector('.btn-submit');
+
+            loadingEl.style.display = 'block';
+            submitBtn.disabled = true;
+
+            // 添加超时控制
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30秒超时
+
+            try {
+                console.log('[充值] 开始请求，参数:', { phone, packagePrice });
+                console.log('[充值] User Agent:', navigator.userAgent);
+
+                const response = await fetch('/api/v1/subscription/admin-activate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-cache'
+                    },
+                    body: JSON.stringify({
+                        phone: phone,
+                        package: packagePrice,
+                        secret_key: SECRET_KEY
+                    }),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+                console.log('[充值] 响应状态:', response.status);
+                console.log('[充值] 响应头:', response.headers);
+
+                // 先检查 HTTP 状态
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                console.log('[充值] 响应数据:', result);
+
+                if (result.status === 'success') {
+                    showMessage(`✅ 会员开通成功！${result.message || ''}`, 'success');
+                    document.getElementById('phone').value = '';
+                    // 如果在列表标签页，刷新列表
+                    if (document.getElementById('listTab').classList.contains('active')) {
+                        loadMemberList(currentPage);
+                    }
+                } else {
+                    showMessage(`❌ ${result.detail || result.message || '开通失败'}`, 'error');
+                }
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.error('[充值] 请求失败:', error);
+                console.error('[充值] 错误名称:', error.name);
+                console.error('[充值] 错误消息:', error.message);
+                console.error('[充值] 错误堆栈:', error.stack);
+
+                if (error.name === 'AbortError') {
+                    showMessage('❌ 请求超时，请检查网络连接后重试', 'error');
+                } else {
+                    showMessage(`❌ 请求失败: ${error.message}`, 'error');
+                }
+            } finally {
+                loadingEl.style.display = 'none';
+                submitBtn.disabled = false;
+                console.log('[充值] 请求结束，loading已隐藏');
+            }
+        });
+
+        // 页面加载时检查访问权限
+        window.addEventListener('DOMContentLoaded', () => {
+            if (checkAccess()) {
+                // 默认不加载会员列表，只有切换到列表标签时才加载
+            }
+        });
+
+        // 切换标签
+        function switchTab(tabName) {
+            // 更新按钮状态
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 更新内容显示
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + 'Tab').classList.add('active');
+
+            // 如果切换到会员列表，加载数据
+            if (tabName === 'list') {
+                loadMemberList(1);
+            }
+        }
+
+        // 会员列表相关变量
+        let currentPage = 1;
+        let totalPages = 1;
+
+        // 加载会员列表
+        async function loadMemberList(page = 1) {
+            try {
+                const response = await fetch(`/api/v1/subscription/admin-list?secret_key=${SECRET_KEY}&page=${page}&page_size=50`);
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    currentPage = result.data.page;
+                    totalPages = result.data.total_pages;
+                    renderMemberList(result.data.members);
+                    updatePagination();
+                } else {
+                    console.error('加载会员列表失败:', result.detail);
+                }
+            } catch (error) {
+                console.error('加载会员列表失败:', error);
+            }
+        }
+
+        // 渲染会员列表
+        function renderMemberList(members) {
+            const tbody = document.getElementById('memberListBody');
+
+            if (!members || members.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">暂无记录</td></tr>';
+                return;
+            }
+
+            // 套餐类型映射
+            const typeMap = {
+                'trial': '试用',
+                'weekly': '周卡',
+                'monthly': '月卡',
+                'quarterly': '季卡',
+                'yearly': '年卡'
+            };
+
+            tbody.innerHTML = members.map(member => {
+                const now = new Date();
+                const endDate = new Date(member.end_date);
+                const isActive = member.is_active && endDate > now;
+
+                return `
+                    <tr>
+                        <td>${member.phone || '-'}</td>
+                        <td>${typeMap[member.membership_type] || member.membership_type}</td>
+                        <td>${formatDateTime(member.start_date)}</td>
+                        <td>${formatDateTime(member.end_date)}</td>
+                        <td class="${isActive ? 'active' : 'inactive'}">
+                            ${isActive ? '✓ 有效' : '✗ 过期'}
+                        </td>
+                        <td>${formatDateTime(member.updated_at)}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // 格式化日期时间
+        function formatDateTime(dateStr) {
+            if (!dateStr) return '-';
+            const date = new Date(dateStr);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}`;
+        }
+
+        // 更新分页信息
+        function updatePagination() {
+            document.getElementById('pageInfo').textContent = `第 ${currentPage} / ${totalPages} 页`;
+            document.getElementById('prevPage').disabled = currentPage <= 1;
+            document.getElementById('nextPage').disabled = currentPage >= totalPages;
+        }
+
+        // 翻页
+        function changePage(delta) {
+            const newPage = currentPage + delta;
+            if (newPage >= 1 && newPage <= totalPages) {
+                loadMemberList(newPage);
+            }
+        }
+    </script>
+</body>
+</html>

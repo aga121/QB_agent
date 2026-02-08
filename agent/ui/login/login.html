@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen Bee - 智能体分享平台</title>
+    <link rel="stylesheet" href="/static/cdn_resourc/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/cdn_resourc/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/login/login.css">
+</head>
+<body>
+    <div class="ambient-light">
+        <div class="light-orb orb-1"></div>
+        <div class="light-orb orb-2"></div>
+        <div class="light-orb orb-3"></div>
+    </div>
+
+    <div class="dust-particles" id="particles"></div>
+
+    <nav class="glass-nav reveal-down">
+        <div class="nav-logo"><i class="fas fa-crown"></i> Queen Bee</div>
+        <div class="nav-links">
+            <span>产品案例</span>
+            <span>关于我们</span>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="hero">
+        <div class="hero-content">
+            <div class="hero-text reveal-left">
+                <span class="brand-tag">INTELLIGENCE SWARM</span>
+                <h1 class="gradient-text">Orchestrate <br>Your Future</h1>
+                <p class="subtitle">以优雅的方式，驾驭复杂的群体智能。<br>新一代企业级智能体协作平台。</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="num">10k+</span>
+                        <span class="label">Agents Active</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="num">99.9%</span>
+                        <span class="label">Reliability</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-wrapper reveal-right">
+                <div class="login-container">
+                    <div class="login-header">
+                        <h2>Welcome Back</h2>
+                        <p>登录控制台，开启智慧之旅</p>
+                    </div>
+
+                    <form class="layui-form login-form" id="loginForm" lay-filter="loginForm">
+                        <div class="layui-form-item floating-label">
+                            <input type="text" name="phone" placeholder=" " autocomplete="off" class="layui-input">
+                            <label>手机号</label>
+                            <i class="layui-icon layui-icon-cellphone"></i>
+                        </div>
+                        <div class="layui-form-item code-row floating-label">
+                            <div class="input-group">
+                                <input type="text" name="code" placeholder=" " autocomplete="off" class="layui-input">
+                                <label>验证码</label>
+                                <i class="layui-icon layui-icon-vercode"></i>
+                            </div>
+                            <button type="button" class="code-btn" id="sendCodeBtn">获取验证码</button>
+                        </div>
+
+                        <button type="submit" class="layui-btn login-btn">
+                            <span>立即登录</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+
+                        <div class="form-footer">
+                            <button type="button" class="text-btn" id="clearPhoneBtn">切换/清除账号</button>
+                        </div>
+
+                        <div class="agreement-tip">
+                            <input type="checkbox" id="agreeCheckbox" lay-ignore style="vertical-align: middle; margin-right: 4px;">
+                            <span style="vertical-align: middle;">我已阅读并同意<a href="/terms/user-agreement" target="_blank">《用户协议》</a>和<a href="/terms/privacy-policy" target="_blank">《隐私政策》</a>，未注册的手机号将自动创建账号</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-mouse" onclick="scrollToSection('showcase')">
+            <div class="mouse-wheel"></div>
+        </div>
+    </section>
+
+    <section class="section showcase-section" id="showcase">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <span class="tag">Use Cases</span>
+                <h2 class="dark-title">突破效率的边界</h2>
+                <div class="title-line"></div>
+            </div>
+
+            <div class="big-case reveal-scale">
+                <div class="case-visual">
+                    <img src="/static/cdn_resourc/placehold/qb-workflow.png" alt="Dashboard" class="tilt-image">
+                </div>
+                <div class="case-content glass-card">
+                    <h3>企业级工作流编排</h3>
+                    <p>通过可视化拖拽，将数百个 AI 智能体串联成复杂的业务流水线。简约而不简单。</p>
+                    <ul class="feature-tags">
+                        <li><i class="fas fa-check"></i> 毫秒级响应</li>
+                        <li><i class="fas fa-check"></i> 可视化编排</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dual-case">
+                <div class="case-row reveal-up">
+                    <div class="case-info">
+                        <h3><i class="fas fa-chart-pie"></i> 智能数据洞察</h3>
+                        <p>不再需要等待分析师的周报。QB 数据智能体实时监控业务指标，以最直观的方式呈现价值。</p>
+                    </div>
+                    <div class="case-img-wrapper">
+                        <img src="/static/cdn_resourc/placehold/data-analytics.png" alt="Analytics">
+                    </div>
+                </div>
+
+                <div class="case-row reverse reveal-up">
+                    <div class="case-info">
+                        <h3><i class="fas fa-code"></i> 自动化研发助理</h3>
+                        <p>让 AI 接管繁琐的单元测试与文档编写。让代码像诗一样优雅。</p>
+                    </div>
+                    <div class="case-img-wrapper">
+                        <img src="/static/cdn_resourc/placehold/code-assistant.png" alt="Coding">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section features-section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <span class="tag">Core Features</span>
+                <h2 class="dark-title">构建未来的基石</h2>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-card span-2 reveal-up" style="transition-delay: 0.1s">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h3>分布式大脑</h3>
+                    <p>独创的 Swarm Consensus 算法，让多个智能体像蜂群一样协同思考。</p>
+                </div>
+                <div class="bento-card reveal-up" style="transition-delay: 0.2s">
+                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>金融级安全</h3>
+                    <p>私有化部署支持，数据不出域。</p>
+                </div>
+                <div class="bento-card reveal-up" style="transition-delay: 0.3s">
+                    <div class="card-icon"><i class="fas fa-plug"></i></div>
+                    <h3>无限插件</h3>
+                    <p>兼容 5000+ 常用 SaaS 工具 API。</p>
+                </div>
+                <div class="bento-card span-3 reveal-up" style="transition-delay: 0.4s">
+                    <div class="content-row">
+                        <div>
+                            <h3>全球节点部署</h3>
+                            <p>无论身在何处，都能获得最低延迟的智能响应。</p>
+                        </div>
+                        <div class="map-decoration"><i class="fas fa-globe-asia"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner reveal-up">
+            <h2>Ready to transform?</h2>
+            <button onclick="scrollToSection('hero')" class="glow-btn">Login Now</button>
+            <p class="copyright">© 2026 Queen Bee Inc. Design by QB. v1.0.0</p>
+        </div>
+    </footer>
+
+    <script src="/static/cdn_resourc/layui/js/layui.js"></script>
+    <script>
+        // 移动设备检测
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   (window.innerWidth <= 768 && 'ontouchstart' in window);
+        }
+
+        // 页面加载时检测设备类型
+        document.addEventListener('DOMContentLoaded', () => {
+            if (isMobileDevice()) {
+                // 禁用登录表单
+                const loginForm = document.getElementById('loginForm');
+                const loginBtn = document.querySelector('.login-btn');
+                const sendCodeBtn = document.getElementById('sendCodeBtn');
+
+                if (loginForm) {
+                    loginForm.style.opacity = '0.5';
+                    loginForm.style.pointerEvents = 'none';
+                }
+                if (loginBtn) loginBtn.disabled = true;
+                if (sendCodeBtn) sendCodeBtn.disabled = true;
+
+                // 显示提示框
+                if (typeof layui !== 'undefined') {
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.open({
+                            type: 1,
+                            title: '温馨提示',
+                            area: ['300px', 'auto'],
+                            closeBtn: 0,
+                            shadeClose: false,
+                            content: '<div style="padding: 20px; text-align: center;">' +
+                                     '<div style="font-size: 48px; margin-bottom: 15px;">📱</div>' +
+                                     '<p style="font-size: 16px; color: #333; margin-bottom: 10px;"><strong>暂不支持移动端登录</strong></p>' +
+                                     '<p style="font-size: 14px; color: #666; line-height: 1.6;">为了获得最佳体验，请使用电脑浏览器访问</p>' +
+                                     '<p style="font-size: 14px; color: #666; line-height: 1.6; margin-top: 10px;">我们正在优化移动端体验，敬请期待~</p>' +
+                                     '</div>',
+                            success: function(layero, index) {
+                                // 居中显示
+                                layero.css('top', '50%').css('margin-top', -layero.height()/2);
+                            }
+                        });
+                    });
+                } else {
+                    alert('温馨提示：\n\n暂不支持移动端登录，请使用电脑浏览器访问\n\n我们正在优化移动端体验，敬请期待~');
+                }
+            }
+        });
+
+        // 视觉交互
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, observerOptions);
+            document.querySelectorAll('.reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
+
+            // 背景光球视差
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                document.querySelectorAll('.light-orb').forEach((orb, index) => {
+                    orb.style.transform = `translateY(${scrolled * (index + 1) * 0.1}px)`;
+                });
+            });
+
+            // 图片倾斜
+            const tiltImages = document.querySelectorAll('.tilt-image');
+            document.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth / 2 - e.pageX) / 60;
+                const y = (window.innerHeight / 2 - e.pageY) / 60;
+                tiltImages.forEach(img => {
+                    img.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+                });
+            });
+        });
+
+        window.scrollToSection = function(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // === 核心业务逻辑 (原样保留) ===
+        layui.use(['form', 'layer'], function(){
+            var form = layui.form;
+            var layer = layui.layer;
+
+            // 微尘粒子效果 (深色粒子)
+            function createParticles() {
+                const container = document.getElementById('particles');
+                if(!container) return;
+                container.innerHTML = '';
+                for(let i=0; i<60; i++) {
+                    const p = document.createElement('div');
+                    p.style.position = 'absolute';
+                    p.style.width = Math.random() * 3 + 'px';
+                    p.style.height = p.style.width;
+                    // 粒子颜色改为深卡其/灰色，以适应浅色背景
+                    p.style.background = 'rgba(139, 126, 102, ' + (Math.random() * 0.4 + 0.1) + ')';
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.top = Math.random() * 100 + '%';
+                    p.style.borderRadius = '50%';
+                    // 随机浮动动画
+                    p.style.animation = `floatParticle ${Math.random()*10 + 10}s infinite linear`;
+                    container.appendChild(p);
+                }
+            }
+            createParticles();
+
+            // 下面是完全相同的登录逻辑
+            const API_BASE_URL = '/api/v1';
+
+            function getFingerprint() {
+                const key = 'clientFingerprint';
+                let value = localStorage.getItem(key);
+                if (!value) {
+                    value = 'fp-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+                    localStorage.setItem(key, value);
+                }
+                return value;
+            }
+
+            function getStoredCode(phone) {
+                if (!phone) return '';
+                const key = 'loginCodeByPhone';
+                const raw = localStorage.getItem(key);
+                if (!raw) return '';
+                try {
+                    const data = JSON.parse(raw);
+                    const entry = data[phone];
+                    if (typeof entry === 'string') return entry;
+                    if (entry && typeof entry === 'object') {
+                        const expiresAt = Number(entry.expiresAt || 0);
+                        if (expiresAt && Date.now() > expiresAt) {
+                            delete data[phone];
+                            localStorage.setItem(key, JSON.stringify(data));
+                            return '';
+                        }
+                        return entry.code || '';
+                    }
+                    return '';
+                } catch (err) { return ''; }
+            }
+
+            function storeCode(phone, code, expiresAt) {
+                if (!phone || !code) return;
+                const key = 'loginCodeByPhone';
+                let data = {};
+                const raw = localStorage.getItem(key);
+                if (raw) {
+                    try { data = JSON.parse(raw) || {}; } catch (err) { data = {}; }
+                }
+                if (expiresAt) {
+                    data[phone] = { code, expiresAt };
+                } else {
+                    data[phone] = code;
+                }
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+
+            function getCooldownUntil() {
+                return Number(localStorage.getItem('loginCodeCooldownUntil') || 0);
+            }
+
+            function setCooldownUntil(untilTs) {
+                localStorage.setItem('loginCodeCooldownUntil', String(untilTs));
+            }
+
+            function clearCooldown() {
+                localStorage.removeItem('loginCodeCooldownUntil');
+            }
+
+            const phoneInput = document.querySelector('input[name="phone"]');
+            const codeInput = document.querySelector('input[name="code"]');
+            const sendCodeBtn = document.getElementById('sendCodeBtn');
+            const clearPhoneBtn = document.getElementById('clearPhoneBtn');
+
+            function updateSendCodeState(phone) {
+                const cooldownUntil = getCooldownUntil();
+                const now = Date.now();
+                if (cooldownUntil > now) {
+                    const remaining = Math.max(0, Math.ceil((cooldownUntil - now) / 1000));
+                    sendCodeBtn.disabled = true;
+                    sendCodeBtn.textContent = `${remaining}s`;
+                    sendCodeBtn.dataset.cooldown = '1';
+                    sendCodeBtn.classList.remove('verified');
+                    codeInput.disabled = false;
+
+                    // 启动新的定时器继续倒计时
+                    const timerKey = 'sendCodeTimer';
+                    if (sendCodeBtn[timerKey]) {
+                        clearInterval(sendCodeBtn[timerKey]);
+                    }
+                    sendCodeBtn[timerKey] = setInterval(() => {
+                        const currentRemaining = Math.max(0, Math.ceil((getCooldownUntil() - Date.now()) / 1000));
+                        if (currentRemaining <= 0) {
+                            clearInterval(sendCodeBtn[timerKey]);
+                            sendCodeBtn[timerKey] = null;
+                            clearCooldown();
+                            const saved = getStoredCode(phoneInput.value.trim());
+                            if (saved) {
+                                sendCodeBtn.textContent = '已认证';
+                                sendCodeBtn.classList.add('verified');
+                                sendCodeBtn.dataset.cooldown = '1';
+                                sendCodeBtn.disabled = true;
+                                codeInput.disabled = true;
+                            } else {
+                                sendCodeBtn.dataset.cooldown = '0';
+                                sendCodeBtn.textContent = '获取验证码';
+                                sendCodeBtn.disabled = false;
+                                codeInput.disabled = false;
+                            }
+                            return;
+                        }
+                        sendCodeBtn.textContent = `${currentRemaining}s`;
+                    }, 1000);
+
+                    return;
+                }
+                const savedCode = getStoredCode(phone);
+                if (savedCode) {
+                    sendCodeBtn.disabled = true;
+                    sendCodeBtn.textContent = '已认证';
+                    sendCodeBtn.dataset.cooldown = '1';
+                    sendCodeBtn.classList.add('verified');
+                    codeInput.disabled = true;
+                    return;
+                }
+                sendCodeBtn.disabled = false;
+                sendCodeBtn.textContent = '获取验证码';
+                sendCodeBtn.dataset.cooldown = '0';
+                sendCodeBtn.classList.remove('verified');
+                codeInput.disabled = false;
+            }
+
+            function getStoredPhone() { return localStorage.getItem('loginPhone') || ''; }
+            function storePhone(phone) { if (!phone) return; localStorage.setItem('loginPhone', phone); }
+
+            phoneInput.addEventListener('input', () => {
+                const phone = phoneInput.value.trim();
+                storePhone(phone);
+                const savedCode = getStoredCode(phone);
+                if (savedCode) codeInput.value = savedCode;
+                updateSendCodeState(phone);
+            });
+            codeInput.addEventListener('input', () => {
+                const phone = phoneInput.value.trim();
+                const code = codeInput.value.trim();
+                storeCode(phone, code);
+            });
+
+            const savedPhone = getStoredPhone();
+            if (savedPhone) phoneInput.value = savedPhone;
+            const initialSaved = getStoredCode(phoneInput.value.trim());
+            if (initialSaved) codeInput.value = initialSaved;
+            updateSendCodeState(phoneInput.value.trim());
+
+            // 协议勾选状态记忆
+            const agreeCheckbox = document.getElementById('agreeCheckbox');
+            const savedAgreement = localStorage.getItem('loginAgreed');
+            if (savedAgreement === 'true') {
+                agreeCheckbox.checked = true;
+            }
+
+            agreeCheckbox.addEventListener('change', () => {
+                localStorage.setItem('loginAgreed', agreeCheckbox.checked);
+            });
+
+            clearPhoneBtn.addEventListener('click', () => {
+                localStorage.removeItem('loginPhone');
+                phoneInput.value = '';
+                codeInput.value = '';
+                updateSendCodeState('');
+                layer.msg('账号已清除', {icon: 1});
+            });
+
+            function isValidPhone(phone) { return /^1\d{10}$/.test(phone); }
+
+            document.getElementById('loginForm').addEventListener('submit', function(e){
+                e.preventDefault();
+                const formData = {
+                    phone: phoneInput.value,
+                    code: codeInput.value
+                };
+
+                if (!isValidPhone(formData.phone.trim())) {
+                    layer.msg('请输入正确的11位手机号', {icon: 2});
+                    return false;
+                }
+
+                // 检查是否同意协议
+                const agreeCheckbox = document.getElementById('agreeCheckbox');
+                if (!agreeCheckbox.checked) {
+                    layer.msg('请阅读并同意《用户协议》和《隐私政策》', {icon: 2});
+                    return false;
+                }
+
+                const submitBtn = document.querySelector('.login-btn');
+                const originalContent = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i> 登录中...';
+                submitBtn.disabled = true;
+
+                fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: formData.phone, code: formData.code })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        localStorage.setItem('isLoggedIn', 'true');
+                        const phoneKey = formData.phone.trim();
+                        let shouldSetExpiry = true;
+                        try {
+                            const raw = localStorage.getItem('loginCodeByPhone');
+                            if (raw) {
+                                const data = JSON.parse(raw) || {};
+                                const entry = data[phoneKey];
+                                if (entry && typeof entry === 'object' && entry.expiresAt) {
+                                    const expiresAt = Number(entry.expiresAt) || 0;
+                                    if (expiresAt && Date.now() <= expiresAt) {
+                                        shouldSetExpiry = false;
+                                    }
+                                }
+                            }
+                        } catch (err) {
+                            shouldSetExpiry = true;
+                        }
+                        if (shouldSetExpiry) {
+                            storeCode(phoneKey, formData.code.trim(), Date.now() + 25 * 24 * 60 * 60 * 1000);
+                        }
+
+                        layer.msg('登录成功！', {icon: 1, time: 1000});
+                        setTimeout(() => { window.location.href = '/chat'; }, 500);
+                    } else {
+                        layer.msg(data.detail || '登录失败', {icon: 2});
+                    }
+                })
+                .catch(error => {
+                    layer.msg('网络错误', {icon: 2});
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalContent;
+                    submitBtn.disabled = false;
+                });
+                return false;
+            });
+
+            sendCodeBtn.addEventListener('click', function() {
+                const phone = phoneInput.value.trim();
+                if (!phone || !isValidPhone(phone)) { layer.msg('手机号格式错误', {icon: 2}); return; }
+                if (sendCodeBtn.dataset.cooldown === '1') return;
+                if (sendCodeBtn.disabled) return;
+
+                sendCodeBtn.disabled = true;
+                const originalText = sendCodeBtn.textContent;
+                sendCodeBtn.textContent = '发送中...';
+
+                fetch(`${API_BASE_URL}/auth/send_code`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Client-Fingerprint': getFingerprint()
+                    },
+                    body: JSON.stringify({ phone })
+                })
+                .then(response => response.json().then(data => ({ ok: response.ok, data })))
+                .then(({ ok, data }) => {
+                    if (ok && data.status === 'success') {
+                        layer.msg('验证码已发送', {icon: 1});
+                        sendCodeBtn.dataset.cooldown = '1';
+                        sendCodeBtn.classList.remove('verified');
+                        let remaining = 60;
+                        setCooldownUntil(Date.now() + remaining * 1000);
+                        sendCodeBtn.textContent = `${remaining}s`;
+                        sendCodeBtn.disabled = true;
+                        const timerKey = 'sendCodeTimer';
+                        if (sendCodeBtn[timerKey]) {
+                            clearInterval(sendCodeBtn[timerKey]);
+                        }
+                        sendCodeBtn[timerKey] = setInterval(() => {
+                            remaining -= 1;
+                            if (remaining <= 0) {
+                                clearInterval(sendCodeBtn[timerKey]);
+                                sendCodeBtn[timerKey] = null;
+                                clearCooldown();
+                                const saved = getStoredCode(phoneInput.value.trim());
+                                if (saved) {
+                                    sendCodeBtn.textContent = '已认证';
+                                    sendCodeBtn.classList.add('verified');
+                                    sendCodeBtn.dataset.cooldown = '1';
+                                    sendCodeBtn.disabled = true;
+                                } else {
+                                    sendCodeBtn.dataset.cooldown = '0';
+                                    sendCodeBtn.textContent = '获取验证码';
+                                    sendCodeBtn.disabled = false;
+                                }
+                                return;
+                            }
+                            setCooldownUntil(Date.now() + remaining * 1000);
+                            sendCodeBtn.textContent = `${remaining}s`;
+                        }, 1000);
+                    } else {
+                        layer.msg(data.detail || '发送失败', {icon: 2});
+                        sendCodeBtn.disabled = false;
+                        sendCodeBtn.textContent = originalText;
+                    }
+                })
+                .catch(() => {
+                    layer.msg('网络错误', {icon: 2});
+                    sendCodeBtn.disabled = false;
+                    sendCodeBtn.textContent = originalText;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

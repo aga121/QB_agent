@@ -1,0 +1,243 @@
+.prompt-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.prompt-btn {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #111827;
+    color: #f9fafb;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prompt-btn:hover {
+    background: #0f172a;
+}
+
+.prompt-panel {
+    position: absolute;
+    right: 0;
+    bottom: 48px;
+    width: 320px;
+    height: 420px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.18);
+    display: flex;
+    flex-direction: column;
+    z-index: 5000;
+    padding-bottom: 16px;
+    overflow: hidden;
+}
+
+.prompt-panel::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 16px;
+    background: #f9fafb;
+    pointer-events: none;
+}
+
+.prompt-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eef2f7;
+    background: #f9fafb;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.prompt-panel-title {
+    font-weight: 600;
+    color: #111827;
+    font-size: 13px;
+}
+
+.prompt-panel-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prompt-manage-btn,
+.prompt-add-inline,
+.prompt-close-btn {
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px 6px;
+    border-radius: 6px;
+}
+
+.prompt-manage-btn:hover,
+.prompt-add-inline:hover,
+.prompt-close-btn:hover {
+    background: #e5e7eb;
+}
+
+.prompt-panel-search {
+    padding: 8px 12px 0 12px;
+}
+
+.prompt-panel-search input {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.prompt-panel-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+}
+
+.prompt-tab {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #4b5563;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.prompt-tab.active {
+    background: #111827;
+    border-color: #111827;
+    color: #f9fafb;
+}
+
+.prompt-panel-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 8px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.prompt-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 8px 10px;
+    background: #ffffff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background 0.15s ease, border 0.15s ease;
+}
+
+.prompt-item:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.prompt-item-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.prompt-item-desc {
+    font-size: 11px;
+    color: #6b7280;
+    line-height: 1.4;
+    max-height: 30px;
+    overflow: hidden;
+}
+
+.prompt-item-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.prompt-item-actions button {
+    border: none;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 11px;
+    padding: 3px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.prompt-editor {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 14px;
+    overflow-y: auto;
+    padding-bottom: 28px;
+}
+
+.prompt-editor.hidden {
+    display: none;
+}
+
+.prompt-editor-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.prompt-editor input,
+.prompt-editor textarea {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 12px;
+}
+
+.prompt-editor-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.prompt-save-btn {
+    flex: 1;
+    background: #111827;
+    color: #f9fafb;
+    border: none;
+    border-radius: 8px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.prompt-cancel-btn {
+    flex: 1;
+    background: #e5e7eb;
+    color: #374151;
+    border: none;
+    border-radius: 8px;
+    padding: 6px;
+    cursor: pointer;
+}
