@@ -14,6 +14,8 @@
 
 - 登录界面  
   ![登录界面](doc/images/1登录界面.png)
+- 主界面  
+  ![主界面](doc/images/2主界面.png)
 - 用户控制面板  
   ![用户控制面板](doc/images/2用户控制面板.png)
 - MCP 安装  

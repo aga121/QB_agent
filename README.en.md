@@ -14,6 +14,8 @@ Core UI (PNG):
 
 - Login screen  
   ![Login screen](doc/images/1登录界面.png)
+- Main screen  
+  ![Main screen](doc/images/2主界面.png)
 - User control panel  
   ![User control panel](doc/images/2用户控制面板.png)
 - MCP install  
