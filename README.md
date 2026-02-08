@@ -21,16 +21,11 @@
 
 ## 快速开始
 
-将源码拉取/下载到服务器后，进入 `install` 目录，执行 `start_install.sh` 即可一键部署使用。
+将源码拉取/下载到服务器后，先到 `agent/backend/core/system/config.py` 填好 #必填1 #必填2，然后进入 `install` 目录执行 `start_install.sh`，即可一键部署使用。
 
 ## 配置说明
 
-配置采用环境变量或本地 `.env` 文件，避免将敏感信息写入仓库。
-
-- `QB_DB_PATH`：数据库路径
-- `QB_API_KEYS`：模型 API Key 列表（逗号分隔）
-- `QB_CORS_ORIGINS`：允许的前端域名（生产环境务必配置）
-- `QB_LOG_LEVEL`：日志级别（如 `INFO` / `WARNING` / `ERROR`）
+进入 `agent/backend/core/system/config.py`，将 #必填1 #必填2 配置完成即可。
  
 
 ## 技术目录
@@ -49,6 +44,6 @@
 
 Apache 2.0
 
-如有问题请联系：17512089424  
+如有问题请联系（电话）：17512089424  
 微信号：`queenbeecai`  
-抖音不定时分享教程：77263839168
+抖音不定时分享教程（抖音号）：77263839168

@@ -8,12 +8,14 @@ from typing import Dict, Any, List
 
 # ==================== 重要配置（API Key 优先） ====================
 
+#必填1 LLM_KEY是智普编程套餐智普里面的apikey
 LLM_KEY = os.getenv('LLM_KEY', '')
 BIGMODEL_API_KEY = os.getenv('BIGMODEL_API_KEY', LLM_KEY)
 
 # MCP 备用 API Key（如果主 API Key 不可用）
 MCP_FALLBACK_API_KEY = os.getenv('WEB_SEARCH_PRIME_API_KEY', '')
 
+#必填2 服务器ip填上
 # 对外访问基础域名（重要配置 如果没域名可配置 http://ip:8001）
 PUBLIC_BASE_URL = os.getenv('PUBLIC_BASE_URL', 'https://queenbeecai.com').rstrip('/')
 

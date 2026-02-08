@@ -21,16 +21,11 @@ Driven by AI programming, it provides professional-grade agent capabilities for 
 
 ## Quick Start
 
-Pull or download the source to your server, go to the `install` directory, and run `start_install.sh` for one-click deployment.
+Pull or download the source to your server, fill in #必填1 #必填2 in `agent/backend/core/system/config.py`, then go to the `install` directory and run `start_install.sh` for one-click deployment.
 
 ## Configuration
 
-Configuration is managed via environment variables or a local `.env` file to keep secrets out of the repo.
-
-- `QB_DB_PATH`: database path
-- `QB_API_KEYS`: model API keys (comma-separated)
-- `QB_CORS_ORIGINS`: allowed frontend origins (must be set in production)
-- `QB_LOG_LEVEL`: log level (e.g., `INFO` / `WARNING` / `ERROR`)
+Go to `agent/backend/core/system/config.py` and fill in #必填1 #必填2.
 
 ## Technology
 
@@ -48,6 +43,6 @@ Configuration is managed via environment variables or a local `.env` file to kee
 
 Apache 2.0
 
-Contact: 17512089424  
+Contact (phone): 17512089424  
 WeChat: `queenbeecai`  
-Douyin (tutorials occasionally): 77263839168
+Douyin (tutorials occasionally, ID): 77263839168
