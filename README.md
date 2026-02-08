@@ -1,35 +1,35 @@
 # Queen_Bee / QB_agent
 
-[English](README.md) | [简体中文](README.zh-CN.md)
+[简体中文](README.md) | [English](README.en.md)
 
-## Overview
+## 简介
 
-_TODO: Write a short project description._
+_TODO: 请补充项目简介。_
 
-## Features
-
-- TODO
-
-## Requirements
+## 功能
 
 - TODO
 
-## Quick Start
+## 运行要求
 
 - TODO
 
-## Configuration
+## 快速开始
 
 - TODO
 
-## Roadmap
+## 配置说明
 
 - TODO
 
-## Contributing
+## 路线图
 
 - TODO
 
-## License
+## 贡献指南
+
+- TODO
+
+## 许可证
 
 - TODO
