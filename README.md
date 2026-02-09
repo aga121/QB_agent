@@ -22,6 +22,8 @@
   ![用户控制面板](doc/images/2用户控制面板.png)
 - MCP 安装  
   ![MCP 安装](doc/images/3支持mcp安装.png)
+- 支持 Skills  
+  ![支持 Skills](doc/images/4支持skills.png)
 
 智能体生成 Demo（GIF，点击查看）：
 
@@ -41,8 +43,6 @@
   ![专业文档图文生成](doc/images/专业文档图文生成.png)
 - 复杂 xlsx 生成  
   ![复杂 xlsx 生成](doc/images/复杂xlsx生成.png)
-- 支持 Skills  
-  ![支持 Skills](doc/images/4支持skills.png)
 - 复杂图形生成方便学习  
   ![复杂图形生成方便学习](doc/images/复杂图形生成方便学习.png)
 - 复杂论文 PDF 生成  
